@@ -3,6 +3,7 @@ import Tenants from './Tenants.js';
 import BuildingInfo from './BuildingInfo.js';
 import Workers from './Workers.js';
 import WorkersInfo from './WorkersInfo.js';
+import SearchBox from './SearchBox.js'
 
 import './App.css';
 
@@ -11,7 +12,8 @@ class App extends Component {
     super (props);
     this.state = {
       tenants:[
-      ]
+      ],
+      search: ""
     };
   }
 
@@ -29,6 +31,12 @@ class App extends Component {
     })
   }
 
+  search(text){
+      this.setState({
+          search: Text
+      });
+  }
+
   render() {
     return (
       <div >
@@ -36,6 +44,7 @@ class App extends Component {
         <h2>
           Edificio Nueva Era
         </h2>
+        <SearchBox search={this.search.bind(this)}/>
         <Tenants tenants={this.state.tenants}/>
         <BuildingInfo tenants={this.state.tenants}/>
         <Workers workers={this.state.tenants} />

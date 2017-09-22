@@ -1,18 +1,45 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import Tenants from './Tenants.js';
+import BuildingInfo from './BuildingInfo.js';
+import Workers from './Workers.js';
+import WorkersInfo from './WorkersInfo.js';
+
 import './App.css';
 
 class App extends Component {
+  constructor(props) {
+    super (props);
+    this.state = {
+      tenants:[
+      ]
+    };
+  }
+
+  componentDidMount(){
+    fetch('/tenants',{method:'GET',
+     headers:{accept:'application/json'}})
+    .then((res)=>{
+      if(res.ok)
+        return res.json();
+    })
+    .then((tenants) =>{
+      this.setState({
+        tenants:tenants
+      });
+    })
+  }
+
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div >
+
+        <h2>
+          Edificio Nueva Era
+        </h2>
+        <Tenants tenants={this.state.tenants}/>
+        <BuildingInfo tenants={this.state.tenants}/>
+        <Workers workers={this.state.tenants} />
+        <WorkersInfo tenants={this.state.tenants}/>
       </div>
     );
   }
